@@ -68,6 +68,12 @@
       msg: "schema output: {{schema}}"  
 
   - name: load cities data
-    ansible.builtin.command: mysql -h mysql.jaiaws446.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
-    when: schema.stdout != "1"       
+    ansible.builtin.shell: "mysql -h mysql.jaiaws446.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql"
+    when: schema.stdout != "1"    
+
+   - name: start and enable catalogue
+     ansible.builtin.service:
+      name: catalogue
+      state: restarted
+      enabled: yes     
 
