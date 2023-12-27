@@ -71,9 +71,9 @@
     ansible.builtin.shell: "mysql -h mysql.jaiaws446.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql"
     when: schema.stdout != "1"    
 
-   - name: start and enable catalogue
+   - name: start and enable shipping
      ansible.builtin.service:
-      name: catalogue
+      name: shipping
       state: restarted
       enabled: yes     
 
